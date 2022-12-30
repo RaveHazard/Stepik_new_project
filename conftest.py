@@ -16,6 +16,7 @@ def browser(request):
         options.add_experimental_option('prefs', {'intl.accept_languages': language})
         browser = webdriver.Chrome(options=options)
         browser.get("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/")
+        browser.implicitly_wait(5)
     elif language == "en":
         print("You choose ru language, start test....")
         options = webdriver.ChromeOptions()
