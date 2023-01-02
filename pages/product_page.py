@@ -6,14 +6,14 @@ from .locators import ProductPageLocators
 from selenium.common.exceptions import NoAlertPresentException
 import math
 
+
 class ProductPage(BasePage):
 
     def should_be_add_in_basket_button(self):
-        assert self.is_element_present(*ProductPageLocators.PRODUCT_BTN),'Page not have basket btn'
+        assert self.is_element_present(*ProductPageLocators.PRODUCT_BTN), 'Page not have basket btn'
 
     def add_item_in_basket(self):
         button_item = self.browser.find_element(*ProductPageLocators.PRODUCT_BTN)
-        self.browser.find_element(*ProductPageLocators.PRODUCT_TITLE)
         button_item.click()
 
     def solve_quiz_and_get_code(self):
@@ -38,10 +38,15 @@ class ProductPage(BasePage):
         return self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
 
     def check_titles(self, title):
-        assert title == self.browser.find_element(*ProductPageLocators.PRODUCT_TITLE_AFTER).text, f'тайтлы не совпадают {title} =! ' \
-                                                                                                  f'{self.browser.find_element(*ProductPageLocators.PRODUCT_TITLE_AFTER).text}'
+        assert title == self.browser.find_element(
+            *ProductPageLocators.PRODUCT_TITLE_AFTER).text, f'тайтлы не совпадают {title} =! ' \
+                                                            f'{self.browser.find_element(*ProductPageLocators.PRODUCT_TITLE_AFTER).text}'
 
     def check_prices(self, price):
         assert price == self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE_AFTER).text, 'цены не совпадают'
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
 
 
